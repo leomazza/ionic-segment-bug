@@ -1,0 +1,7 @@
+{
+  "name": "ionic-segment-bug",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
