@@ -1,20 +1,48 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Ionic Segment Bug Test</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <ion-segment
+    [value]="segmentA$ | async"
+    (ionChange)="updateSegmentA($event.detail.value!)"
+  >
+    <ion-segment-button value="A-1">
+      <ion-label>segment A-1</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="A-2">
+      <ion-label>segment A-2</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <p class="ion-text-center">segment A value = "{{ segmentA$.value }}"</p>
+  <hr />
+  <div *ngIf="observable$ | async as dataSource; else noData">
+    <ion-segment
+      [value]="segmentB"
+      (ionChange)="updateSegmentB($event.detail.value!)"
+    >
+      <ion-segment-button value="B-1">
+        <ion-label>segment B-1</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="B-2">
+        <ion-label>segment B-2</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <p class="ion-text-center">segment B value = "{{ segmentB }}"</p>
+    <hr />
+    <ion-segment value="default">
+      <ion-segment-button value="default">
+        <ion-label>Default</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="segment">
+        <ion-label>Segment</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </div>
+
+  <ng-template #noData
+    ><p class="ion-text-center">No data to display</p></ng-template
+  >
 </ion-content>
